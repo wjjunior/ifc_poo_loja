@@ -9,7 +9,7 @@
 class Database
 {
     const HOST = 'localhost';
-    const DATABASE = 'loja';
+    const DATABASE = 'ifc_poo_loja';
     const USER = 'root';
     const PASSWORD = '';
 
