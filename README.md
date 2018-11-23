@@ -3,11 +3,8 @@
 Trabalho de POO II - CRUD - Categoria
 
 const HOST = 'localhost'
-```
 const DATABASE = 'ifc_poo_loja'
-```
 const USER = 'root'
-```
 const PASSWORD = ''
 ```
 
