@@ -10,21 +10,21 @@
         <div class="container">
             <?php $categorias = $dados['categorias']; ?>
             <?php foreach ($categorias as $categoria) { ?>
-                <form class="form-horizontal" method="post" action="index.php?acao=edit&id=<?= $categoria->getid(); ?>">
-                    <h2 class="text-center">Edita Categoria - <?= $categoria->getNome(); ?></h2>
+                <form class="form-horizontal" method="post" action="index.php?acao=edit&id=<?= $categoria['id']; ?>">
+                    <h2 class="text-center">Edita Categoria - <?= $categoria['nome']; ?></h2>
                     <br><br> 
                     <div class="align-middle">
                         <div class="align-middle">
                             <div class="form-group align-middle">
                                 <label class="control-label col-sm-2" for="nome">Categoria:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="nome" placeholder="Categoria" name="nome" value="<?= $categoria->getNome(); ?>">
+                                    <input type="text" class="form-control" id="nome" placeholder="Categoria" name="nome" value="<?= $categoria['nome']; ?>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="descricao">Descrição:</label>
                                 <div class="col-sm-6"> 
-                                    <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" value="<?= $categoria->getDescricao(); ?>">
+                                    <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" value="<?= $categoria['descricao']; ?>">
                                 </div>
                             </div>
                             <div class="form-group">

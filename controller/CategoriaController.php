@@ -23,7 +23,7 @@ class CategoriaController
         try {
             $categorias = $catdao->selectAll();
         } catch (PDOException $e) {
-            echo "Erro: ".$e->getMessage();
+            echo "Erro: " . $e->getMessage();
         }
 
         $this->dados['categorias'] = $categorias;
@@ -41,7 +41,7 @@ class CategoriaController
         try {
             $categorias = $catdao->select_id($id);
         } catch (PDOException $e) {
-            echo "Erro: ".$e->getMessage();
+            echo "Erro: " . $e->getMessage();
         }
 
         $this->dados['categorias'] = $categorias;
@@ -64,7 +64,7 @@ class CategoriaController
                 $categorias = $catdao->insert($name,$description);
                 header("location: index.php");
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                echo "Erro: " . $e->getMessage();
             }
         }
         
@@ -81,7 +81,7 @@ class CategoriaController
         try {
             $categorias = $catdao->update($id);
         } catch (PDOException $e) {
-            echo "Erro: ".$e->getMessage();
+            echo "Erro: " . $e->getMessage();
         }
 
         $this->dados['categorias'] = $categorias;
@@ -100,7 +100,7 @@ class CategoriaController
             $categorias = $catdao->delete($id);
             header("location: index.php");
         } catch (PDOException $e) {
-            echo "Erro: ".$e->getMessage();
+            echo "Erro: " . $e->getMessage();
         }
     }
 }

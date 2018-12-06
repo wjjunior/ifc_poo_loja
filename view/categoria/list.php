@@ -23,14 +23,14 @@
                     <?php  $categorias = $dados['categorias']; ?>
                     <?php foreach ($categorias as $categoria): ?>
                     <tr>
-                        <td><?php echo $categoria->getid(); ?></td>
-                        <td><a href="index.php?acao=view&id=<?php echo $categoria->getid(); ?>"><?= $categoria->getNome(); ?></a></td>
-                        <td><?php echo $categoria->getDescricao(); ?></td>
+                        <td><?php echo $categoria['id']; ?></td>
+                        <td><a href="index.php?acao=view&id=<?php echo $categoria['id']; ?>"><?= $categoria['nome']; ?></a></td>
+                        <td><?php echo $categoria['descricao']; ?></td>
                         <td>
-                            <a href="index.php?acao=edit&id=<?= $categoria->getid(); ?>" class="btn btn-primary">
+                            <a href="index.php?acao=edit&id=<?= $categoria['id']; ?>" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-edit"></span> edita
                             </a>
-                            <a href="index.php?acao=delete&id=<?= $categoria->getid(); ?>" class="btn btn-danger">
+                            <a href="index.php?acao=delete&id=<?= $categoria['id']; ?>" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-trash"></span> deleta
                             </a>
                         </td>

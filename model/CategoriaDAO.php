@@ -19,7 +19,9 @@ class CategoriaDAO extends DAO
         try {
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute();
-            $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
+            // $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
+            $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
             return $categorias;
         } catch (PDOException $e) {
             throw new PDOException($e);
@@ -32,7 +34,9 @@ class CategoriaDAO extends DAO
         try {
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute();
-            $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
+            // $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
+            $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
             return $categorias;
         } catch (PDOException $e) {
             throw new PDOException($e);
@@ -58,7 +62,8 @@ class CategoriaDAO extends DAO
         try {
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute();
-            $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
+            // $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
+            $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             if ($_POST != null) {
                 $name = $_POST['nome'];

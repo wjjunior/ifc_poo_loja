@@ -21,9 +21,9 @@
                     <?php $categorias = $dados['categorias']; ?>
                     <?php foreach ($categorias as $categoria) { ?>
                         <tr>
-                            <td><?= utf8_encode($categoria->getid()); ?></td>
-                            <td><?= utf8_encode($categoria->getNome()); ?></td>
-                            <td><?= utf8_encode($categoria->getDescricao()); ?></td>
+                            <td><?= $categoria['id']; ?></td>
+                            <td><?= $categoria['nome']; ?></td>
+                            <td><?= $categoria['descricao']; ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: speroni
@@ -50,5 +51,4 @@ class Categoria
     {
         $this->descricao = $descricao;
     }
-
 }
