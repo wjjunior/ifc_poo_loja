@@ -3,6 +3,7 @@
     <form class="form-horizontal" method="post" action="index.php?acao=gravaAtualizar">
         <h2 class="text-center">Edita Categoria - <?= $categoria->getNome(); ?></h2>
         <br><br> 
+        <input type="hidden" name="id" value="<?=$categoria->getId()?>">
         <div class="align-middle">
             <div class="align-middle">
                 <div class="form-group align-middle">

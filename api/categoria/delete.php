@@ -14,10 +14,9 @@ $dados_recebidos = file_get_contents('php://input');
 $dados = json_decode($dados_recebidos, true);
 
 $id = $dados['id'];
-$categoria = new Categoria($id);
 $catdao = new CategoriaDAO();
 
-if ($catdao->delete($categoria)) {
+if ($catdao->delete($id)) {
     header('HTTP/1.1 201 Created');
     header('Content-type: application/json');
     echo json_encode(['msg'=>'Categoria deletada com sucesso.']);

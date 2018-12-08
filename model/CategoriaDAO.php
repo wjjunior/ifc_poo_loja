@@ -84,12 +84,11 @@ class CategoriaDAO extends DAO
         }
     }
 
-    public function delete($categoria)
+    public function delete($id)
     {
         $sql = "DELETE FROM categoria WHERE id = :valorid";
         $stmt = $this->conexao->prepare($sql);
-
-        $id = $categoria->getId();
+        
         $stmt->bindParam(':valorid', $id);
 
         try {
