@@ -11,7 +11,6 @@ $dao = new CategoriaDAO();
 
 // faz a consulta e guarda o array com os dados em $categorias
 $resultadocats = $dao->selectAll();
-// print_r($resultadocats);
 
 /*
  * como o array retornado contem objetos, e estes objetos têm atributos privados, precisamos percorrê-los

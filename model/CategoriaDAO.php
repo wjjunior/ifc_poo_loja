@@ -43,12 +43,16 @@ class CategoriaDAO extends DAO
         }
     }
 
-    public function insert($name, $description)
+    public function insert($categoria)
     {
         $sql = "INSERT INTO categoria (nome, descricao) VALUES (:nome, :descricao)";
         $stmt = $this->conexao->prepare($sql);
-        $stmt->bindParam(':nome', $name);
-        $stmt->bindParam(':descricao', $description);
+
+        $nome = $categoria->getNome();
+        $descricao = $categoria->getDescricao();
+        
+        $stmt->bindParam(':nome', $nome);
+        $stmt->bindParam(':descricao', $descricao);
         if ($stmt->execute()) {
             return true;
         } else {
@@ -56,8 +60,12 @@ class CategoriaDAO extends DAO
         }
     }
 
-    public function update($id)
+    public function update($categoria)
     {
+        $id = $categoria->getId();
+        $name = $categoria->getNome();
+        $description = $categoria->getDescricao();
+        
         $sql = "SELECT * FROM categoria WHERE id = $id ORDER BY nome";
         try {
             $stmt = $this->conexao->prepare($sql);
@@ -68,15 +76,15 @@ class CategoriaDAO extends DAO
             if ($_POST != null) {
                 $name = $_POST['nome'];
                 $description = $_POST['descricao'];
-                
-                $sql = 'UPDATE categoria SET nome = "' . $name . '", descricao = "' . $description . '" WHERE id = "' . $id . '"';
-                $stmt = $this->conexao->prepare($sql);
-                if ($stmt->execute()) {
-                    header("location: index.php");
-                    return true;
-                } else {
-                    return false;
-                }
+            }
+
+            $sql = 'UPDATE categoria SET nome = "' . $name . '", descricao = "' . $description . '" WHERE id = "' . $id . '"';
+            $stmt = $this->conexao->prepare($sql);
+            if ($stmt->execute()) {
+                header("location: index.php");
+                return true;
+            } else {
+                return false;
             }
 
             return $categorias;
@@ -85,8 +93,10 @@ class CategoriaDAO extends DAO
         }
     }
 
-    public function delete($id)
+    public function delete($categoria)
     {
+        $id = $categoria->getId();
+
         $sql = 'DELETE FROM categoria WHERE id = "' . $id . '"';
         try {
             $stmt = $this->conexao->prepare($sql);

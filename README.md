@@ -1,6 +1,6 @@
 # ifc_poo_loja
 
-Trabalho de POO II - CRUD - Categoria
+Trabalho de POO II - CRUD - Categoria e API Restful
 
 ```
 const HOST = 'localhost'
