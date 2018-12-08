@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: speroni
@@ -15,28 +16,27 @@ class CategoriaDAO extends DAO
 {
     public function selectAll()
     {
-        $sql = "SELECT * FROM categoria ORDER BY id ASC";
+        $sql = "SELECT * FROM categoria ORDER BY nome";
         try {
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute();
-            // $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
-            $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+            $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
+
             return $categorias;
         } catch (PDOException $e) {
             throw new PDOException($e);
         }
     }
 
-    public function select_id($id)
+    public function select($id)
     {
-        $sql = "SELECT * FROM categoria WHERE id = $id ORDER BY nome";
+        $sql = "SELECT * FROM categoria WHERE id = :valorid ORDER BY nome";
         try {
             $stmt = $this->conexao->prepare($sql);
+            $stmt->bindParam(':valorid', $id);
             $stmt->execute();
-            // $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
-            $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+            $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
+
             return $categorias;
         } catch (PDOException $e) {
             throw new PDOException($e);
@@ -45,66 +45,56 @@ class CategoriaDAO extends DAO
 
     public function insert($categoria)
     {
-        $sql = "INSERT INTO categoria (nome, descricao) VALUES (:nome, :descricao)";
-        $stmt = $this->conexao->prepare($sql);
-
-        $nome = $categoria->getNome();
-        $descricao = $categoria->getDescricao();
-        
-        $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':descricao', $descricao);
-        if ($stmt->execute()) {
-            return true;
-        } else {
+       $sql = "INSERT INTO categoria (nome, descricao) VALUES (:nome, :descricao)";
+       $stmt = $this->conexao->prepare($sql);
+       
+       $nome = $categoria->getNome();
+       $descricao = $categoria->getDescricao();
+       
+       $stmt->bindParam(':nome', $nome);
+       $stmt->bindParam(':descricao', $descricao);
+       try {
+           $stmt->execute();
+           return true;
+        } catch (PDOException $e) {
+            throw $e;
             return false;
         }
     }
 
     public function update($categoria)
     {
+        $sql = "UPDATE categoria SET nome = :nome, descricao = :descricao WHERE id = :id";
+        $stmt = $this->conexao->prepare($sql);
+
         $id = $categoria->getId();
-        $name = $categoria->getNome();
-        $description = $categoria->getDescricao();
-        
-        $sql = "SELECT * FROM categoria WHERE id = $id ORDER BY nome";
+        $nome = $categoria->getNome();
+        $descricao = $categoria->getDescricao();
+
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':nome', $nome);
+        $stmt->bindParam(':descricao', $descricao);
+
         try {
-            $stmt = $this->conexao->prepare($sql);
             $stmt->execute();
-            // $categorias = $stmt->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Categoria', ['nome', 'descricao', 'id']);
-            $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            if ($_POST != null) {
-                $name = $_POST['nome'];
-                $description = $_POST['descricao'];
-            }
-
-            $sql = 'UPDATE categoria SET nome = "' . $name . '", descricao = "' . $description . '" WHERE id = "' . $id . '"';
-            $stmt = $this->conexao->prepare($sql);
-            if ($stmt->execute()) {
-                header("location: index.php");
-                return true;
-            } else {
-                return false;
-            }
-
-            return $categorias;
+            return true;
         } catch (PDOException $e) {
-            throw new PDOException($e);
+            throw $e;
+            return false;
         }
     }
 
     public function delete($categoria)
     {
-        $id = $categoria->getId();
+        $sql = "DELETE FROM categoria WHERE id = :valorid";
+        $stmt = $this->conexao->prepare($sql);
 
-        $sql = 'DELETE FROM categoria WHERE id = "' . $id . '"';
+        $id = $categoria->getId();
+        $stmt->bindParam(':valorid', $id);
+
         try {
-            $stmt = $this->conexao->prepare($sql);
-            if ($stmt->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+            $stmt->execute();
+            return true;
         } catch (PDOException $e) {
             throw new PDOException($e);
         }

@@ -8,7 +8,6 @@
  * Classe contendo os atributos de uma tabela de categoria
  * Os atributos estão encapsulados e temos os métodos GETTERS e SETTERS
  */
-
 class Categoria
 {
     private $id;

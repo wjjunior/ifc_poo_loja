@@ -1,14 +1,13 @@
 <?php
-
-require "../config/Database.php";
+require_once "../config/Database.php";
+//AQUI FAREMOS O PRIMEIRO TESTE DE CONEXAO E CONSULTA
 
 $conexao = Database::getConexao();
 
-$sql = "SELECT * FROM categoria";
+$sql = "select * from categoria";
 
 $resultado = $conexao->query($sql);
 
 $categorias = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-echo "<pre>";
+echo ('<pre>');
 print_r($categorias);

@@ -15,7 +15,7 @@ class CategoriaController
 {
     private $dados;
 
-    public function index()
+    public function principal()
     {
         $this->dados = array();
         $catdao = new CategoriaDAO();
@@ -23,23 +23,23 @@ class CategoriaController
         try {
             $categorias = $catdao->selectAll();
         } catch (PDOException $e) {
-            echo "Erro: " . $e->getMessage();
+            echo "Erro: ".$e->getMessage();
         }
 
         $this->dados['categorias'] = $categorias;
 
         View::carregar('view/template/cabecalho.html');
-        View::carregar('view/categoria/list.php', $this->dados);
+        View::carregar('view/categoria/listar.php', $this->dados);
         View::carregar('view/template/rodape.html');
     }
 
-    public function view($id)
+    public function detalhes($id)
     {
         $this->dados = array();
         $catdao = new CategoriaDAO();
 
         try {
-            $categorias = $catdao->select_id($id);
+            $categorias = $catdao->select($id);
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
@@ -47,39 +47,35 @@ class CategoriaController
         $this->dados['categorias'] = $categorias;
 
         View::carregar('view/template/cabecalho.html');
-        View::carregar('view/categoria/view.php', $this->dados);
+        View::carregar('view/categoria/detalhes.php', $this->dados);
         View::carregar('view/template/rodape.html');
     }
 
-    public function add()
+    public function incluir()
     {
-        if ($_POST != NULL) {
-            $this->dados = array();
-            $catdao = new CategoriaDAO();
-
-            $name = $_POST['nome'];
-            $description = $_POST['descricao'];
-
-            try {
-                $categorias = $catdao->insert($name,$description);
-                header("location: index.php");
-            } catch (PDOException $e) {
-                echo "Erro: " . $e->getMessage();
-            }
-        }
-        
         View::carregar('view/template/cabecalho.html');
-        View::carregar('view/categoria/add.php', $this->dados);
+        View::carregar('view/categoria/incluir.html');
         View::carregar('view/template/rodape.html');
     }
+    
+    public function inserir($categoria)
+    {
+        $catdao = new CategoriaDAO();
+        try {
+            $catdao->insert($categoria);
+            header('location: index.php');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
-    public function edit($id)
+    public function atualizar($id)
     {
         $this->dados = array();
         $catdao = new CategoriaDAO();
 
         try {
-            $categorias = $catdao->update($id);
+            $categorias = $catdao->select($id);
         } catch (PDOException $e) {
             echo "Erro: " . $e->getMessage();
         }
@@ -87,20 +83,29 @@ class CategoriaController
         $this->dados['categorias'] = $categorias;
 
         View::carregar('view/template/cabecalho.html');
-        View::carregar('view/categoria/edit.php', $this->dados);
+        View::carregar('view/categoria/atualizar.php', $this->dados);
         View::carregar('view/template/rodape.html');
     }
 
-    public function delete($id)
+    public function gravaAtualizar($categoria)
     {
-        $this->dados = array();
         $catdao = new CategoriaDAO();
-
         try {
-            $categorias = $catdao->delete($id);
-            header("location: index.php");
+            $catdao->update($categoria);
+            header('location: index.php');
         } catch (PDOException $e) {
-            echo "Erro: " . $e->getMessage();
+            echo $e->getMessage();
+        }
+    }
+
+    public function excluir($id)
+    {
+        $catdao = new CategoriaDAO();
+        try {
+            $catdao->delete($id);
+            header('location: index.php');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
 }

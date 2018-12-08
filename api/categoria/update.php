@@ -9,11 +9,9 @@ require_once "../../model/CategoriaDAO.php";
 
 // PEGO O JSON EM TEXTO, COMO CHEGOU
 $dados_recebidos = file_get_contents('php://input');
-// print_r($dados_recebidos);
 
 // TRANSFORMO O TEXTO EM UM ARRAY
 $dados = json_decode($dados_recebidos, true);
-// print_r($dados);
 
 $id = $dados['id'];
 $name = $dados['nome'];

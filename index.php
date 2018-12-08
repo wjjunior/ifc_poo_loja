@@ -1,9 +1,6 @@
 <?php
 
 require_once "controller/CategoriaController.php";
-require_once "controller/ProdutoController.php";
-
-//ROTAS -
 
 if (isset($_GET['acao'])) {
     $acao = $_GET['acao'];
@@ -11,29 +8,49 @@ if (isset($_GET['acao'])) {
     $acao = 'index';
 }
 
-if (isset($_GET['id']) && $_GET['id'] != '') {
-    $id = $_GET['id'];
-};
-
 switch ($acao) {
     case 'index':
         $cat = new CategoriaController();
-        $cat->index();
-        break;
-    case 'view':
+        $cat->principal();
+        exit;
+    case 'detalhes':
+        $id = $_GET['id'];
         $cat = new CategoriaController();
-        $cat->view($id);
-        break;
-    case 'add':
+        $cat->detalhes($id);
+        exit;
+    case 'incluir':
         $cat = new CategoriaController();
-        $cat->add();
-        break;
-    case 'edit':
+        $cat->incluir();
+        exit;
+    case 'gravaInserir':
+        $categoriaNova = new Categoria();
+        $categoriaNova->setNome($_POST['nome']);
+        $categoriaNova->setDescricao($_POST['descricao']);
         $cat = new CategoriaController();
-        $cat->edit($id);
-        break;
-    case 'delete':
+        $cat->inserir($categoriaNova);
+        exit;
+    case 'atualizar':
+        $id = $_GET['id'];
         $cat = new CategoriaController();
-        $cat->delete($id);
-        break;
+        $cat->atualizar($id);
+        exit;
+    case 'gravaAtualizar':
+        $categoriaNova = new Categoria();
+        $categoriaNova->setId($_POST['id']);
+        $categoriaNova->setNome($_POST['nome']);
+        $categoriaNova->setDescricao($_POST['descricao']);
+        $cat = new CategoriaController();
+        $cat->gravaAtualizar($categoriaNova);
+        exit;
+    case 'excluir':
+        $id = $_GET['id'];
+        $cat = new CategoriaController();
+        $cat->excluir($id);
+        exit;
+    default:
+        echo "Ação inválida";
 }
+
+
+
+
