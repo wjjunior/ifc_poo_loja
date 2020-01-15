@@ -1,14 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: speroni
- * Date: 29/09/18
- * Time: 22:24
- *
- * Classe de Acesso a Dados de Categoria - Contem os métodos para manipulacao dos dados
- */
-
 require_once "Categoria.php";
 require_once "DAO.php";
 

@@ -117,7 +117,7 @@ class ProductController
             $v->rule('required', ['nome', 'descricao', 'preco', 'categoria']);
             if ($v->validate()) {
                 $product = new Product();
-                $product->setId($data['id']);
+                
                 $product->setNome($data['nome']);
                 $product->setDescricao($data['descricao']);
                 $product->setFoto($data['foto']);

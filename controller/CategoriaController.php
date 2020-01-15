@@ -63,7 +63,7 @@ class CategoriaController
         $catdao = new CategoriaDAO();
         try {
             $catdao->insert($categoria);
-            header('location: index.php');
+            header('location: index.php?acao=listar');
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -92,7 +92,7 @@ class CategoriaController
         $catdao = new CategoriaDAO();
         try {
             $catdao->update($categoria);
-            header('location: index.php');
+            header('location: index.php?acao=listar');
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -103,7 +103,7 @@ class CategoriaController
         $catdao = new CategoriaDAO();
         try {
             $catdao->delete($id);
-            header('location: index.php');
+            header('location: index.php?acao=listar');
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

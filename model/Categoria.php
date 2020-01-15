@@ -1,13 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: speroni
- * Date: 29/09/18
- * Time: 22:23
- * Classe contendo os atributos de uma tabela de categoria
- * Os atributos estão encapsulados e temos os métodos GETTERS e SETTERS
- */
 class Categoria
 {
     private $id;

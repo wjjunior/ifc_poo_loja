@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: speroni
- * Date: 30/09/18
- * Time: 19:20
- */
-
 class Database
 {
     const HOST = 'localhost';
