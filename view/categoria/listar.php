@@ -25,7 +25,6 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -35,7 +34,6 @@
                     <tr>
                         <td><?php echo $categoria->getId(); ?></td>
                         <td><a href="index.php?acao=detalhes&id=<?php echo $categoria->getId(); ?>"><?= $categoria->getNome(); ?></a></td>
-                        <td><?php echo $categoria->getDescricao(); ?></td>
                         <td>
                             <a href="index.php?acao=atualizar&id=<?= $categoria->getId(); ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#" class="delete" data-value="<?= $categoria->getId() ?>"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>

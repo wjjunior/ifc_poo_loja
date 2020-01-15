@@ -17,9 +17,9 @@
                 <td><?= $product->getId(); ?></td>
                 <td><?= $product->getNome(); ?></td>
                 <td><?= $product->getDescricao(); ?></td>
-                <td><img src="<?php echo $product->getFoto(); ?>" class="list-img" alt=""></td>
+                <td><img src="<?php echo ($product->getFoto() ? $product->getFoto() : './assets/images/noimage.png') ?>" class="list-img" alt="" id="img-foto"></td>
                 <td><?php echo $product->getPreco(); ?></td>
-                <td><?php echo $product->getIdCategoria(); ?></td>
+                <td align="center"><?php echo $product->getIdCategoria(); ?></td>
             </tr>
         </tbody>
     </table>

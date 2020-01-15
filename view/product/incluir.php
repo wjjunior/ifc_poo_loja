@@ -18,7 +18,7 @@
         document.getElementById('img-foto').src = await toBase64(files[0]);
     }
 </script>
-<div class="container py-5">
+<div class="container">
     <?php $categories = $dados['categories']; ?>
     <div class="row">
         <div class="col-md-12">
@@ -55,13 +55,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-3" for="preco">Preço:</label>
+                                        <label class="control-label col-sm-3" for="preco">Price:</label>
                                         <div class="col-sm-3">
                                             <input type="text" class="form-control money" id="preco" placeholder="Price" name="preco">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-4" for="categoria">Categoria:</label>
+                                        <label class="control-label col-sm-4" for="categoria">Category:</label>
                                         <div class="col-sm-4">
                                             <select name="categoria" id="categoria" class="form-control">
                                                 <?php foreach ($categories as $category) : ?>

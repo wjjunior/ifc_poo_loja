@@ -25,7 +25,6 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Image</th>
                     <th>Price</th>
                     <th>Category</th>
@@ -38,8 +37,7 @@
                     <tr>
                         <td><?php echo $product->getId(); ?></td>
                         <td><a href="index.php?product=detalhes&id=<?php echo $product->getId(); ?>"><?= $product->getNome(); ?></a></td>
-                        <td><?php echo $product->getDescricao(); ?></td>
-                        <td><img src="<?php echo ($product->getFoto() ? $product->getFoto() : './assets/images/noimage.png') ?>"id="img-" class="list-img" alt=""></td>
+                        <td><img src="<?php echo ($product->getFoto() ? $product->getFoto() : './assets/images/noimage.png') ?>" class="list-img" alt=""></td>
                         <td><?php echo '$'.$product->getPreco(); ?></td>
                         <td align="center"><?php echo $product->getIdCategoria(); ?></td>
                         <td>

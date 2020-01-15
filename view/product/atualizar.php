@@ -53,17 +53,17 @@
                                             <input type="hidden" id="foto" name="foto" value="<?= $product->getFoto(); ?>">
                                         </div>
                                         <div class="col-sm-12 mt-3">
-                                            <img src="<?= $product->getFoto(); ?>" class="list-img" alt="" id="img-foto">
+                                            <img src="<?php echo ($product->getFoto() ? $product->getFoto() : './assets/images/noimage.png') ?>" class="list-img" alt="" id="img-foto">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-3" for="preco">Preço:</label>
+                                        <label class="control-label col-sm-3" for="preco">Price:</label>
                                         <div class="col-sm-3">
                                             <input type="text" class="form-control money" id="preco" placeholder="Price" name="preco" value="<?= $product->getPreco() * 100; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-4" for="categoria">Categoria:</label>
+                                        <label class="control-label col-sm-4" for="categoria">Category:</label>
                                         <div class="col-sm-4">
                                             <select name="categoria" id="categoria" class="form-control">
                                                 <?php foreach ($categories as $category) : ?>
