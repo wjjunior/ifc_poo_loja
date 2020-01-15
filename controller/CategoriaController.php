@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: speroni
- * Date: 30/09/18
- * Time: 14:45
- */
-
 require_once "model/CategoriaDAO.php";
 require_once "model/Categoria.php";
 require_once "view/View.php";
