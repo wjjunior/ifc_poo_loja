@@ -3,20 +3,20 @@
 class Product
 {
     private $id;
-    private $nome;
-    private $descricao;
-    private $foto;
-    private $preco;
-    private $id_categoria;
+    private $name;
+    private $description;
+    private $image;
+    private $price;
+    private $category_id;
 
-    public function __construct($id = null, $nome = null, $descricao = null, $foto = null, $preco = null, $id_categoria = null)
+    public function __construct($id = null, $name = null, $description = null, $image = null, $price = null, $category_id = null)
     {
         $this->id = $id;
-        $this->nome = $nome;
-        $this->descricao = $descricao;
-        $this->foto = $foto;
-        $this->preco = $preco;
-        $this->id_categoria = $id_categoria;
+        $this->name = $name;
+        $this->description = $description;
+        $this->image = $image;
+        $this->price = $price;
+        $this->category_id = $category_id;
     }
 
     public function getId()
@@ -29,53 +29,53 @@ class Product
         $this->id = $id;
     }
 
-    public function getNome()
+    public function getName()
     {
-        return $this->nome;
+        return $this->name;
     }
 
-    public function setNome($nome)
+    public function setName($name)
     {
-        $this->nome = $nome;
+        $this->name = $name;
     }
 
-    public function getDescricao()
+    public function getDescription()
     {
-        return $this->descricao;
+        return $this->description;
     }
 
-    public function setDescricao($descricao)
+    public function setDescription($description)
     {
-        $this->descricao = $descricao;
+        $this->description = $description;
     }
 
-    public function getFoto()
+    public function getImage()
     {
-        return $this->foto;
+        return $this->image;
     }
 
-    public function setFoto($foto)
+    public function setImage($image)
     {
-        $this->foto = $foto;
+        $this->image = $image;
     }
 
-    public function getPreco()
+    public function getPrice()
     {
-        return $this->preco;
+        return $this->price;
     }
 
-    public function setPreco($preco)
+    public function setPrice($price)
     {
-        $this->preco = $preco;
+        $this->price = $price;
     }
 
-    public function getIdCategoria()
+    public function getCategoryId()
     {
-        return $this->id_categoria;
+        return $this->category_id;
     }
 
-    public function setIdCategoria($id_categoria)
+    public function setCategoryId($category_id)
     {
-        $this->id_categoria = $id_categoria;
+        $this->category_id = $category_id;
     }
 }

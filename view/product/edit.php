@@ -14,58 +14,60 @@
     };
 
     const uploadFile = async (files) => {
-        document.getElementById('foto').value = await toBase64(files[0]);
-        document.getElementById('img-foto').src = await toBase64(files[0]);
+        document.getElementById('image').value = await toBase64(files[0]);
+        document.getElementById('img-image').src = await toBase64(files[0]);
     }
 </script>
-<div class="container">
-    <?php $categories = $dados['categories']; ?>
+<div class="container py-5">
+    <?php $categories = $data['categories']; ?>
+    <?php $product = $data['products'][0]; ?>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-8 offset-md-2">
                 <!-- form new category -->
                 <div class="card card-outline-secondary">
                     <div class="card-header">
-                        <h3 class="mb-0">New Product</h3>
+                        <h3 class="mb-0">Edit <?= $product->getName(); ?></h3>
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal" method="post" action="index.php?product=gravaInserir">
+                        <form class="form-horizontal" method="post" action="index.php?product=update">
                             <div class="align-middle">
                                 <div class="align-middle">
                                     <div class="form-group align-middle">
-                                        <label class="control-label col-sm-2" for="nome">Name:</label>
+                                        <label class="control-label col-sm-2" for="name">Name:</label>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="nome" placeholder="Product name" name="nome">
+                                            <input type="hidden" name="id" value="<?= $product->getId(); ?>">
+                                            <input type="text" class="form-control" id="name" placeholder="Product name" name="name" value="<?= $product->getName(); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-4" for="descricao">Description:</label>
+                                        <label class="control-label col-sm-4" for="description">Description:</label>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="descricao" placeholder="Description" name="descricao">
+                                            <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="<?= $product->getDescription(); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-4" for="foto">Photo:</label>
+                                        <label class="control-label col-sm-4" for="image">Photo:</label>
                                         <div class="col-sm-12">
-                                            <input type="file" id="image" name="image" onchange="uploadFile(this.files)">
-                                            <input type="hidden" id="foto" name="foto">
+                                            <input type="file" id="image" name="image-upload" onchange="uploadFile(this.files)">
+                                            <input type="hidden" id="image" name="image" value="<?= $product->getImage(); ?>">
                                         </div>
                                         <div class="col-sm-12 mt-3">
-                                            <img src="./assets/images/noimage.png" class="list-img" alt="" id="img-foto">
+                                            <img src="<?php echo ($product->getImage() ? $product->getImage() : './assets/images/noimage.png') ?>" class="list-img" alt="" id="img-image">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-3" for="preco">Price:</label>
+                                        <label class="control-label col-sm-3" for="price">Price:</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control money" id="preco" placeholder="Price" name="preco">
+                                            <input type="text" class="form-control money" id="price" placeholder="Price" name="price" value="<?= $product->getPrice() * 100; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-4" for="categoria">Category:</label>
+                                        <label class="control-label col-sm-4" for="category">Category:</label>
                                         <div class="col-sm-4">
-                                            <select name="categoria" id="categoria" class="form-control">
+                                            <select name="category" id="category" class="form-control">
                                                 <?php foreach ($categories as $category) : ?>
-                                                    <option value="<?php echo $category->getId(); ?>"><?php echo $category->getNome(); ?></option>
+                                                    <option value="<?php echo $category->getId(); ?>" <?php if ($product->getCategoryId() == $category->getId()) echo 'selected' ?>><?php echo $category->getName(); ?></option>
                                                 <?php endforeach ?>
                                             </select>
                                         </div>

@@ -4,14 +4,14 @@ require_once __DIR__."/../config/Database.php";
 
 class DAO
 {
-    protected $conexao;
+    protected $connection;
 
     public function __construct()
     {
         try {
-            $this->conexao = Database::getConexao();
+            $this->connection = Database::getConnection();
         } catch (PDOException $e) {
-            echo 'Erro: ' . $e->getMessage();
+            echo 'Error: ' . $e->getMessage();
         }
     }
 }

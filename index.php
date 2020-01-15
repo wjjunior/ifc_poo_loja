@@ -1,106 +1,64 @@
 <?php
 
-require_once "controller/CategoriaController.php";
+require_once "controller/CategoryController.php";
 require_once "controller/ProductController.php";
 require_once "vendor/autoload.php";
 
-use Valitron\Validator;
-
-if (isset($_GET['acao'])) {
-    $acao = $_GET['acao'];
-} elseif (isset($_GET['product'])) {
-    $acao = $_GET['product'];
+if (isset($_GET['product'])) {
+    $product = new ProductController();
+    switch ($_GET['product']) {
+        case 'index':
+            $product->index();
+            break;
+        case 'show':
+            $product->show($_GET['id']);
+            break;
+        case 'create':
+            $product->create();
+            break;
+        case 'gravaInserir':
+            $product->store($_POST);
+            break;
+        case 'destroy':
+            $product->destroy($_GET['id']);
+            break;
+        case 'edit':
+            $product->edit($_GET['id']);
+            break;
+        case 'update':
+            $product->update($_POST);
+            break;
+        default:
+            http_response_code(404);
+    }
+} elseif (isset($_GET['category'])) {
+    $cat = new CategoryController();
+    switch ($_GET['category']) {
+        case 'index':
+            $cat->index();
+            break;
+        case 'show':
+            $cat->show($_GET['id']);
+            break;
+        case 'create':
+            $cat->create();
+            break;
+        case 'gravaInserir':
+            $cat->store($_POST);
+            break;
+        case 'edit':
+            $cat->edit($_GET['id']);
+            break;
+        case 'update':
+            $cat->update($_POST);
+            break;
+        case 'destroy':
+            $cat->destroy($_GET['id']);
+            break;
+        default:
+            http_response_code(404);
+    }
 } else {
     $product = new ProductController();
-    $product->principal();
-}
-
-if (isset($_GET['product'])) {
-    switch ($acao) {
-        case 'listar':
-            $product = new ProductController();
-            $product->principal();
-            break;
-        case 'detalhes':
-            $product = new ProductController();
-            $product->detalhes($_GET['id']);
-            break;
-        case 'incluir':
-            $product = new ProductController();
-            $product->incluir();
-            break;
-        case 'gravaInserir':
-            $product = new ProductController();
-            $product->inserir($_POST);
-            break;
-        case 'excluir':
-            $product = new ProductController();
-            $product->excluir($_GET['id']);
-            break;
-        case 'atualizar':
-            $product = new ProductController();
-            $product->atualizar($_GET['id']);
-            break;
-        case 'gravaAtualizar':
-            $product = new ProductController();
-            $product->gravaAtualizar($_POST);
-            break;
-        default:
-            echo "Ação inválida";
-    }
-} else {
-    switch ($acao) {
-        case 'listar':
-            $cat = new CategoriaController();
-            $cat->principal();
-            break;
-        case 'detalhes':
-            $id = $_GET['id'];
-            $cat = new CategoriaController();
-            $cat->detalhes($id);
-            break;
-        case 'incluir':
-            $cat = new CategoriaController();
-            $cat->incluir();
-            break;
-        case 'gravaInserir':
-            $v = new Validator($_POST);
-            $v->rule('required', ['nome', 'descricao']);
-            if ($v->validate()) {
-                $categoriaNova = new Categoria();
-                $categoriaNova->setNome($_POST['nome']);
-                $categoriaNova->setDescricao($_POST['descricao']);
-                $cat = new CategoriaController();
-                $cat->inserir($categoriaNova);
-            } else {
-                print_r($v->errors());
-            }
-            break;
-        case 'atualizar':
-            $id = $_GET['id'];
-            $cat = new CategoriaController();
-            $cat->atualizar($id);
-            break;
-        case 'gravaAtualizar':
-            $v = new Validator($_POST);
-            $v->rule('required', ['nome', 'descricao']);
-            if ($v->validate()) {
-                $categoriaEdit = new Categoria();
-                $categoriaEdit->setId($_POST['id']);
-                $categoriaEdit->setNome($_POST['nome']);
-                $categoriaEdit->setDescricao($_POST['descricao']);
-                $cat = new CategoriaController();
-                $cat->gravaAtualizar($categoriaEdit);
-            } else {
-                print_r($v->errors());
-            }
-            break;
-        case 'excluir':
-            $id = $_GET['id'];
-            $cat = new CategoriaController();
-            $cat->excluir($id);
-            break;
-        default:
-            echo "Ação inválida";
-    }
+    $product->index();
 }

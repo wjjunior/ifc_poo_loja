@@ -7,13 +7,12 @@ class ProductDAO extends DAO
 {
     public function selectAll()
     {
-        $sql = "SELECT * FROM produto ORDER BY id";
+        $sql = "SELECT * FROM products ORDER BY id";
         try {
-            $stmt = $this->conexao->prepare($sql);
+            $stmt = $this->connection->prepare($sql);
             $stmt->execute();
-            $produtos = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Product', ['nome', 'descricao', 'foto', 'preco', 'id_categoria', 'id']);
-
-            return $produtos;
+            $products = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Product', ['name', 'description', 'image', 'price', 'category_id', 'id']);
+            return $products;
         } catch (PDOException $e) {
             throw new PDOException($e);
         }
@@ -21,35 +20,36 @@ class ProductDAO extends DAO
 
     public function select($id)
     {
-        $sql = "SELECT * FROM produto WHERE id = :valorid ORDER BY nome";
+        $sql = "SELECT * FROM products WHERE id = :id ORDER BY name";
         try {
-            $stmt = $this->conexao->prepare($sql);
-            $stmt->bindParam(':valorid', $id);
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
-            $produtos = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Product', ['nome', 'descricao', 'foto', 'preco', 'id_categoria', 'id']);
+            $products = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Product', ['name', 'description', 'image', 'price', 'category_id', 'id']);
 
-            return $produtos;
+            return $products;
         } catch (PDOException $e) {
             throw new PDOException($e);
         }
     }
 
-    public function insert($produto)
+    public function insert($product)
     {
-        $sql = "INSERT INTO produto (nome, descricao, foto, preco, id_categoria) VALUES (:nome, :descricao, :foto, :preco, :id_categoria)";
-        $stmt = $this->conexao->prepare($sql);
+        $sql = "INSERT INTO products (name, description, image, price, category_id) VALUES (:name, :description, :image, :price, :category_id)";
+        $stmt = $this->connection->prepare($sql);
 
-        $nome = $produto->getNome();
-        $descricao = $produto->getDescricao();
-        $foto = $produto->getFoto();
-        $preco = $produto->getPreco();
-        $id_categoria = $produto->getIdCategoria();
+        $productName = $product->getName();
+        $productDescription = $product->getDescription();
+        $productImage = $product->getImage();
+        $productPrice = $product->getPrice();
+        $productCategory = $product->getCategoryId();
 
-        $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':descricao', $descricao);
-        $stmt->bindParam(':foto', $foto);
-        $stmt->bindParam(':preco', $preco);
-        $stmt->bindParam(':id_categoria', $id_categoria);
+        $stmt->bindParam(':name', $productName);
+        $stmt->bindParam(':description', $productDescription);
+        $stmt->bindParam(':image', $productImage);
+        $stmt->bindParam(':price', $productPrice);
+        $stmt->bindParam(':category_id', $productCategory);
+        
         try {
             $stmt->execute();
             return true;
@@ -59,24 +59,24 @@ class ProductDAO extends DAO
         }
     }
 
-    public function update($produto)
+    public function update($product)
     {
-        $sql = "UPDATE produto SET nome = :nome, descricao = :descricao, foto = :foto, preco = :preco, id_categoria = :id_categoria WHERE id = :id";
-        $stmt = $this->conexao->prepare($sql);
+        $sql = "UPDATE products SET name = :name, description = :description, image = :image, price = :price, category_id = :category_id WHERE id = :id";
+        $stmt = $this->connection->prepare($sql);
 
-        $id = $produto->getId();
-        $nome = $produto->getNome();
-        $descricao = $produto->getDescricao();
-        $foto = $produto->getFoto();
-        $preco = $produto->getPreco();
-        $id_categoria = $produto->getIdCategoria();
+        $productId = $product->getId();
+        $productName = $product->getName();
+        $productDescription = $product->getDescription();
+        $productImage = $product->getImage();
+        $productPrice = $product->getPrice();
+        $productCategory = $product->getCategoryId();
 
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':descricao', $descricao);
-        $stmt->bindParam(':foto', $foto);
-        $stmt->bindParam(':preco', $preco);
-        $stmt->bindParam(':id_categoria', $id_categoria);
+        $stmt->bindParam(':id', $productId);
+        $stmt->bindParam(':name', $productName);
+        $stmt->bindParam(':description', $productDescription);
+        $stmt->bindParam(':image', $productImage);
+        $stmt->bindParam(':price', $productPrice);
+        $stmt->bindParam(':category_id', $productCategory);
 
         try {
             $stmt->execute();
@@ -89,10 +89,10 @@ class ProductDAO extends DAO
 
     public function delete($id)
     {
-        $sql = "DELETE FROM produto WHERE id = :valorid";
-        $stmt = $this->conexao->prepare($sql);
+        $sql = "DELETE FROM products WHERE id = :id";
+        $stmt = $this->connection->prepare($sql);
 
-        $stmt->bindParam(':valorid', $id);
+        $stmt->bindParam(':id', $id);
 
         try {
             $stmt->execute();

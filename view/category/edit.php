@@ -1,4 +1,4 @@
-<?php $categoria = $dados['categorias'][0]; ?>
+<?php $category = $data['categories'][0]; ?>
 <div class="container py-5">
     <div class="row">
         <div class="col-md-12">
@@ -6,23 +6,23 @@
                 <!-- form edit category -->
                 <div class="card card-outline-secondary">
                     <div class="card-header">
-                        <h3 class="mb-0">Edit <?= $categoria->getNome(); ?></h3>
+                        <h3 class="mb-0">Edit <?= $category->getName(); ?></h3>
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal" method="post" action="index.php?acao=gravaAtualizar">
-                            <input type="hidden" name="id" value="<?= $categoria->getId() ?>">
+                        <form class="form-horizontal" method="post" action="index.php?category=update">
+                            <input type="hidden" name="id" value="<?= $category->getId() ?>">
                             <div class="align-middle">
                                 <div class="align-middle">
                                     <div class="form-group align-middle">
-                                        <label class="control-label col-sm-2" for="nome">Name:</label>
+                                        <label class="control-label col-sm-2" for="name">Name:</label>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="nome" placeholder="Category name" name="nome" value="<?= $categoria->getNome(); ?>">
+                                            <input type="text" class="form-control" id="name" placeholder="Category name" name="name" value="<?= $category->getName(); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-sm-4" for="descricao">Description:</label>
+                                        <label class="control-label col-sm-4" for="description">Description:</label>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="descricao" placeholder="Description" name="descricao" value="<?= $categoria->getDescricao(); ?>">
+                                            <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="<?= $category->getDescription(); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">

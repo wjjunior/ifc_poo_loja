@@ -2,8 +2,8 @@
 
 class View
 {
-    public static function carregar($pagina, $dados = null)
+    public static function load($page, $data = null)
     {
-        include $pagina;
+        include $page;
     }
 } 

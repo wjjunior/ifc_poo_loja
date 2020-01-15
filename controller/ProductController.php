@@ -2,82 +2,82 @@
 
 require_once "model/ProductDAO.php";
 require_once "model/Product.php";
-require_once "model/Categoria.php";
+require_once "model/Category.php";
 require_once "view/View.php";
 
 use Valitron\Validator;
 
 class ProductController
 {
-    private $dados;
+    private $data;
 
-    public function principal()
+    public function index()
     {
-        $this->dados = array();
+        $this->data = array();
         $prodDAO = new ProductDAO();
 
         try {
             $products = $prodDAO->selectAll();
         } catch (PDOException $e) {
-            echo "Erro: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
 
-        $this->dados['products'] = $products;
+        $this->data['products'] = $products;
 
-        View::carregar('view/template/cabecalho.html');
-        View::carregar('view/product/listar.php', $this->dados);
-        View::carregar('view/template/rodape.html');
+        View::load('view/template/header.html');
+        View::load('view/product/index.php', $this->data);
+        View::load('view/template/footer.html');
     }
 
-    public function detalhes($id)
+    public function show($id)
     {
-        $this->dados = array();
+        $this->data = array();
         $prodDAO = new ProductDAO();
 
         try {
             $products = $prodDAO->select($id);
         } catch (PDOException $e) {
-            echo "Erro: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
 
-        $this->dados['products'] = $products;
+        $this->data['products'] = $products;
 
-        View::carregar('view/template/cabecalho.html');
-        View::carregar('view/product/detalhes.php', $this->dados);
-        View::carregar('view/template/rodape.html');
+        View::load('view/template/header.html');
+        View::load('view/product/show.php', $this->data);
+        View::load('view/template/footer.html');
     }
 
-    public function incluir()
+    public function create()
     {
-        $this->dados = [];
-        $catDAO = new CategoriaDAO;
+        $this->data = [];
+        $catDAO = new CategoryDAO;
 
         try {
             $categories = $catDAO->selectAll();
         } catch (PDOException $e) {
-            echo "Erro: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
-        $this->dados['categories'] =  $categories;
-        View::carregar('view/template/cabecalho.html');
-        View::carregar('view/product/incluir.php', $this->dados);
-        View::carregar('view/template/rodape.html');
+        $this->data['categories'] =  $categories;
+        View::load('view/template/header.html');
+        View::load('view/product/create.php', $this->data);
+        View::load('view/template/footer.html');
     }
 
-    public function inserir($data)
+    public function store($data)
     {
         try {
             $prodDAO = new ProductDAO();
             $v = new Validator($data);
-            $v->rule('required', ['nome', 'descricao', 'preco', 'categoria']);
+            $v->rule('required', ['name', 'description', 'price', 'category']);
             if ($v->validate()) {
                 $newProduct = new Product();
-                $newProduct->setNome($data['nome']);
-                $newProduct->setDescricao($data['descricao']);
-                $newProduct->setFoto($data['foto']);
-                $newProduct->setPreco($data['preco']);
-                $newProduct->setIdCategoria($data['categoria']);
+                $newProduct->setName($data['name']);
+                $newProduct->setDescription($data['description']);
+                $newProduct->setImage($data['image']);
+                $newProduct->setPrice($data['price']);
+                $newProduct->setCategoryId($data['category']);
                 $prodDAO->insert($newProduct);
-                header('location: index.php?product=listar');
+                header('location: index.php?product=index');
             } else {
                 print_r($v->errors());
             }
@@ -86,45 +86,45 @@ class ProductController
         }
     }
 
-    public function atualizar($id)
+    public function edit($id)
     {
-        $this->dados = array();
+        $this->data = array();
         $prodDAO = new ProductDAO();
-        $catDAO = new CategoriaDAO;
+        $catDAO = new CategoryDAO;
 
         try {
             $products = $prodDAO->select($id);
             $categories = $catDAO->selectAll();
         } catch (PDOException $e) {
-            echo "Erro: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
 
-        $this->dados['products'] = $products;
-        $this->dados['categories'] =  $categories;
+        $this->data['products'] = $products;
+        $this->data['categories'] =  $categories;
 
 
-        View::carregar('view/template/cabecalho.html');
-        View::carregar('view/product/atualizar.php', $this->dados);
-        View::carregar('view/template/rodape.html');
+        View::load('view/template/header.html');
+        View::load('view/product/edit.php', $this->data);
+        View::load('view/template/footer.html');
     }
 
-    public function gravaAtualizar($data)
+    public function update($data)
     {
-        
+
         try {
             $prodDAO = new ProductDAO();
             $v = new Validator($data);
-            $v->rule('required', ['nome', 'descricao', 'preco', 'categoria']);
+            $v->rule('required', ['name', 'description', 'price', 'category']);
             if ($v->validate()) {
                 $product = new Product();
-                
-                $product->setNome($data['nome']);
-                $product->setDescricao($data['descricao']);
-                $product->setFoto($data['foto']);
-                $product->setPreco($data['preco']);
-                $product->setIdCategoria($data['categoria']);
+
+                $product->setName($data['name']);
+                $product->setDescription($data['description']);
+                $product->setImage($data['image']);
+                $product->setPrice($data['price']);
+                $product->setCategoryId($data['category']);;
                 $prodDAO->update($product);
-                header('location: index.php?product=listar');
+                header('location: index.php?product=index');
             } else {
                 print_r($v->errors());
             }
@@ -133,12 +133,12 @@ class ProductController
         }
     }
 
-    public function excluir($id)
+    public function destroy($id)
     {
         $prodDAO = new ProductDAO();
         try {
             $prodDAO->delete($id);
-            header('location: index.php?product=listar');
+            header('location: index.php?product=index');
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

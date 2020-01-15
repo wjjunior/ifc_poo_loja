@@ -1,4 +1,4 @@
-<?php $product = $dados['products'][0]; ?>
+<?php $product = $data['products'][0]; ?>
 <div class="container">
     <h2 class="text-center">Product Details</h2><br><br>
     <table class="table">
@@ -15,11 +15,11 @@
         <tbody>
             <tr>
                 <td><?= $product->getId(); ?></td>
-                <td><?= $product->getNome(); ?></td>
-                <td><?= $product->getDescricao(); ?></td>
-                <td><img src="<?php echo ($product->getFoto() ? $product->getFoto() : './assets/images/noimage.png') ?>" class="list-img" alt="" id="img-foto"></td>
-                <td><?php echo $product->getPreco(); ?></td>
-                <td align="center"><?php echo $product->getIdCategoria(); ?></td>
+                <td><?= $product->getName(); ?></td>
+                <td><?= $product->getDescription(); ?></td>
+                <td><img src="<?php echo ($product->getImage() ? $product->getImage() : './assets/images/noimage.png') ?>" class="list-img" alt="" id="img-foto"></td>
+                <td><?php echo '$'.$product->getPrice(); ?></td>
+                <td align="center"><?php echo $product->getCategoryId(); ?></td>
             </tr>
         </tbody>
     </table>

@@ -2,19 +2,19 @@
 class Database
 {
     const HOST = 'localhost';
-    const DATABASE = 'loja';
+    const DATABASE = 'store';
     const USER = 'seller';
     const PASSWORD = '123456';
 
-    public static $conexao;
+    public static $connection;
 
-    public static function getConexao()
+    public static function getConnection()
     {
         $dsn = 'mysql://host='.self::HOST.';dbname='.self::DATABASE.';charset=utf8';
         try {
-            self::$conexao = new PDO($dsn, self::USER, self::PASSWORD);
-            self::$conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return self::$conexao;
+            self::$connection = new PDO($dsn, self::USER, self::PASSWORD);
+            self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return self::$connection;
         } catch (PDOException $e) {
             throw new PDOException($e);
         }

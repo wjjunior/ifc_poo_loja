@@ -1,8 +1,8 @@
 <script>
     $(document).ready(function() {
         $(".delete").click(function() {
-            if (window.confirm("Deseja excluir o produto?")) {
-                window.location = "index.php?product=excluir&id=" + this.dataset.value;
+            if (window.confirm("Confirm?")) {
+                window.location = "index.php?product=destroy&id=" + this.dataset.value;
             }
         });
     });
@@ -16,7 +16,7 @@
                     <h2>Manage Products</h2>
                 </div>
                 <div class="col-sm-6">
-                    <a href="index.php?product=incluir" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+                    <a href="index.php?product=create" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
                 </div>
             </div>
         </div>
@@ -32,16 +32,16 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $products = $dados['products']; ?>
+                <?php $products = $data['products']; ?>
                 <?php foreach ($products as $product) : ?>
                     <tr>
                         <td><?php echo $product->getId(); ?></td>
-                        <td><a href="index.php?product=detalhes&id=<?php echo $product->getId(); ?>"><?= $product->getNome(); ?></a></td>
-                        <td><img src="<?php echo ($product->getFoto() ? $product->getFoto() : './assets/images/noimage.png') ?>" class="list-img" alt=""></td>
-                        <td><?php echo '$'.$product->getPreco(); ?></td>
-                        <td><?php echo $product->getIdCategoria(); ?></td>
+                        <td><a href="index.php?product=show&id=<?php echo $product->getId(); ?>"><?= $product->getName(); ?></a></td>
+                        <td><img src="<?php echo ($product->getImage() ? $product->getImage() : './assets/images/noimage.png') ?>" class="list-img" alt=""></td>
+                        <td><?php echo '$'.$product->getPrice(); ?></td>
+                        <td><?php echo $product->getCategoryId(); ?></td>
                         <td>
-                            <a href="index.php?product=atualizar&id=<?= $product->getId(); ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="index.php?product=edit&id=<?= $product->getId(); ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#" class="delete" data-value="<?= $product->getId() ?>"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
