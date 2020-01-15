@@ -11,7 +11,8 @@ if (isset($_GET['acao'])) {
 } elseif (isset($_GET['product'])) {
     $acao = $_GET['product'];
 } else {
-    $acao = 'index';
+    $product = new ProductController();
+    $product->principal();
 }
 
 if (isset($_GET['product'])) {
@@ -49,7 +50,7 @@ if (isset($_GET['product'])) {
     }
 } else {
     switch ($acao) {
-        case 'index':
+        case 'listar':
             $cat = new CategoriaController();
             $cat->principal();
             break;

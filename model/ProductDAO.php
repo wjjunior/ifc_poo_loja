@@ -7,7 +7,7 @@ class ProductDAO extends DAO
 {
     public function selectAll()
     {
-        $sql = "SELECT * FROM produto ORDER BY nome";
+        $sql = "SELECT * FROM produto ORDER BY id";
         try {
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute();

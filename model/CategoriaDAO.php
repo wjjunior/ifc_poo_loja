@@ -16,7 +16,7 @@ class CategoriaDAO extends DAO
 {
     public function selectAll()
     {
-        $sql = "SELECT * FROM categoria ORDER BY nome";
+        $sql = "SELECT * FROM categoria ORDER BY id";
         try {
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute();
