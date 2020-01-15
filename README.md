@@ -11,9 +11,9 @@ Consider a scenario where you are building an application where other developers
 ## Instructions
 
 - Clone this repository.
-- Create a new branch named `your-name / dev`
+- Create a new branch named `your-name/dev`
 - Develop the applications.
-- Create a pull request from the `your-name / dev` branch to the ` master` branch.
+- Create a pull request from the `your-name/dev` branch to the ` master` branch.
 
 ## Test Requirements:
 
