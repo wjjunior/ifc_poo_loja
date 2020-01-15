@@ -1,6 +1,6 @@
 <?php $categoria = $dados['categorias'][0]; ?>
 <div class="container">
-    <h2 class="text-center">Detalhe de Categoria</h2><br><br>       
+    <h2 class="text-center">Detalhe de Categoria</h2><br><br>
     <table class="table">
         <thead>
             <tr>
@@ -17,4 +17,7 @@
             </tr>
         </tbody>
     </table>
+    <div class="row" style="float:right">
+        <button type="button" class="btn btn-danger btn-form" onclick="history.back()">Back</button>
+    </div>
 </div>

@@ -1,0 +1,54 @@
+<script>
+    $(document).ready(function() {
+        $(".delete").click(function() {
+            if (window.confirm("Deseja excluir o produto?")) {
+                window.location = "index.php?product=excluir&id=" + this.dataset.value;
+            }
+        });
+    });
+</script>
+
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Manage Products</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a href="index.php?product=incluir" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $products = $dados['products']; ?>
+                <?php foreach ($products as $product) : ?>
+                    <tr>
+                        <td><?php echo $product->getId(); ?></td>
+                        <td><a href="index.php?product=detalhes&id=<?php echo $product->getId(); ?>"><?= $product->getNome(); ?></a></td>
+                        <td><?php echo $product->getDescricao(); ?></td>
+                        <td><img src="<?php echo ($product->getFoto() ? $product->getFoto() : './assets/images/noimage.png') ?>"id="img-" class="list-img" alt=""></td>
+                        <td><?php echo '$'.$product->getPreco(); ?></td>
+                        <td align="center"><?php echo $product->getIdCategoria(); ?></td>
+                        <td>
+                            <a href="index.php?product=atualizar&id=<?= $product->getId(); ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#" class="delete" data-value="<?= $product->getId() ?>"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>
